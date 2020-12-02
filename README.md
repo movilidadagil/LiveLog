@@ -21,8 +21,7 @@ This project is shared to see as a web and graphic result of cucumber scenarios 
 In this shared project, you do not need to copy your cucumber-report.json file to src directory in angular project.
 Because I imporved a spring-boot api project so please entegrate it to your hook class in cucumber project as below
 and check your test steps online.
-<script src="https://gist.github.com/movilidadagil/3ddcc588cdff44cd47cbe3c3ad601c33.js"></script>
-
+https://gist.github.com/movilidadagil/3ddcc588cdff44cd47cbe3c3ad601c33
 
 Eso es un proyecto angular.
 
