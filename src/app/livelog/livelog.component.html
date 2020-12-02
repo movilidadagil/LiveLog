@@ -1,0 +1,208 @@
+<div class="container">
+  <script src="formatter.js"></script>
+  <div class="row">
+
+    <section>
+      <h2 class="h1 py-5 font-weight-bold text-center">Livelog Senaryoları</h2>
+      <div class="col-md-4">
+        <div class="col-lg-4 col-md-12 mb-4">
+          <table mdbTable striped="true">
+            <tbody><tr><td>
+              <div style="display: block">
+                <canvas mdbChart
+                        [chartType]="chartType"
+                        [datasets]="chartDatasets"
+                        [labels]="chartLabels"
+                        [colors]="chartColors"
+                        [options]="chartOptions"
+                        [legend]="true"
+                        (chartHover)="chartHovered($event)"
+                        (chartClick)="chartClicked($event)">
+                </canvas>
+              </div>
+            </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+    <div class="col-lg-4 col-md-6 mb-4">
+      <h2 class="h1 py-5 font-weight-bold text-center">Test Results</h2>
+      <div class="card-header">Test Results</div>
+      <div class="list-group list-group-flush">
+        <a class="list-group-item list-group-item-action waves-effect">Fail
+          <mdb-badge danger="true" pill="true" class="pull-right">{{countfail}}
+            <mdb-icon fas icon="arrow-down" class="ml-1"></mdb-icon>
+          </mdb-badge>
+        </a>
+        <a class="list-group-item list-group-item-action waves-effect">Pass
+          <mdb-badge success="true" pill="true" class="pull-right">{{countpass}}
+            <mdb-icon fas icon="arrow-up" class="ml-1"></mdb-icon>
+          </mdb-badge>
+        </a>
+        <a class="list-group-item list-group-item-action waves-effect">Block
+          <mdb-badge [warning]="true"  pill="true" class="pull-right">{{countblock}}</mdb-badge>
+        </a>
+        <a class="list-group-item list-group-item-action waves-effect">Not executed
+          <mdb-badge color="grey" pill="true" class="pull-right">{{countnotexec}}
+            <mdb-icon fas icon="arrow-right" class="ml-1"></mdb-icon>
+          </mdb-badge>
+        </a>
+      </div>
+    </div>
+    <section>
+      <h2 class="h1 py-5 font-weight-bold text-center">Slack WebHook</h2>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <button mdbBtn color="primary"
+                  outline="true" size="md"  (click)="slackle()" class="m-0 px-3 py-2" type="button" id="button-addon1"
+                  mdbWavesEffect>Slackle</button>
+        </div>
+        <input type="text" class="form-control" placeholder="" aria-label="Example text with button addon"
+               aria-describedby="button-addon1"  [(ngModel)]="inputModel" (ngModelChange)="textChange(inputModel)"  >
+      </div>
+
+    </section>
+
+
+    <table mdbTable striped="true">
+      <thead>
+      <tr>
+        <th *ngFor="let head of headElements" scope="col">{{ head }}</th>
+      </tr>
+      </thead>
+      <tbody mdbTableCol *ngFor="let el of contents">
+      <tr>
+        <td scope="row">
+          <button
+
+            type="button"
+            mdbBtn
+            color="danger"
+            class="master-button"
+            mdbWavesEffect
+            *ngIf="el.collapsed"
+            (click)="el.collapsed = !el.collapsed"
+          >
+            <mdb-icon fas icon="angle-down"></mdb-icon>
+          </button>
+          <button
+            rounded="true"
+            type="button"
+            mdbBtn
+            color="orange"
+            class="master-button"
+            mdbWavesEffect
+            *ngIf="!el.collapsed"
+            (click)="el.collapsed = !el.collapsed"
+          >
+            <mdb-icon *ngIf="el.stepResult.includes('skipped')" fas icon="bug"></mdb-icon>
+            <mdb-icon *ngIf="el.stepResult.includes('failed')" fas icon="angry"></mdb-icon>
+            <mdb-icon *ngIf="el.stepResult.includes('passed')" fas icon="check-circle"></mdb-icon>
+
+          </button>
+          <span class="ml-1">{{ el.id }}</span>
+        </td>
+        <td>{{ el.stepResult }}</td>
+        <td>{{ el.stepDesc }}</td>
+      </tr>
+      <tr
+        *ngIf="el.collapsed"
+        style="text-align: center; background-color: rgba(0, 0, 0,  0.015)"
+      >
+        <td colspan="100%" style="border: 0 !important">
+          <table mdbTable>
+            <thead class="black white-text">
+            <tr>
+              <th *ngFor="let head of masterHeadElements" scope="col">{{ head }}</th>
+            </tr>
+            </thead>
+            <tbody *ngFor="let detail of el.steps">
+            <tr>
+
+              <td>{{ detail.stepDesc }}</td>
+              <td>{{ detail.stepResult }}</td>
+              <td  *ngIf="detail.result.status.includes('skipped')">
+                <mdb-icon  fas icon="angle-double-right"></mdb-icon>{{ detail.stepResult }}
+              </td>
+              <td *ngIf="detail.result.status.includes('failed')">
+                <mdb-icon  fas icon="angry"></mdb-icon>{{ detail.stepResult }}
+              </td>
+              <td *ngIf="detail.result.status.includes('passed')">
+                <mdb-icon  fas icon="check-circle"></mdb-icon>{{ detail.stepResult }}
+              </td>
+
+              <td>
+         <span class="table-remove">
+           <button *ngIf="detail.result.status.includes('failed')" type="button" autocomplete="off"
+                   mdbWavesEffect mdbBtn color="danger" rounded="true" size="sm" class="active"   (click)="showmodalboxerrormessage(detail)" (click)="frame.show()" >GÖSTER</button>
+         </span>
+              </td>
+            </tr >
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div mdbModal #basicModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-notify modal-success" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.hide()">
+            <span aria-hidden="true">×</span>
+          </button>
+          <h4 class="modal-title w-100" id="myModalLabel">Test Automation Execution</h4>
+        </div>
+        <div class="modal-body">
+          <div class="text-center">
+            <mdb-icon fas icon="gem" size="4x" class="mb-3 animated rotateIn"></mdb-icon>
+
+            <span class="text-info" contenteditable="true">{{modalErrorMessage}}</span>
+
+
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close" (click)="basicModal.hide()"   mdbWavesEffect>Close</button>
+          <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect (click)="basicModal.hide()" >Finish changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div mdbModal #frame="mdbModal" class="modal fade top" id="frameModalTop" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+       aria-hidden="true">
+    <div class="modal-dialog modal-notify modal-info" role="document">
+      <!--Content-->
+      <div class="modal-content">
+        <!--Header-->
+        <div class="modal-header">
+          <p class="heading lead">Test Automation Execution</p>
+
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="frame.hide()">
+            <span aria-hidden="true" class="white-text">&times;</span>
+          </button>
+        </div>
+
+        <!--Body-->
+        <div class="modal-body">
+          <div class="text-center">
+            <span  class="text-info" contenteditable="true"> {{modalErrorMessage}}</span>
+
+          </div>
+        </div>
+
+        <!--Footer-->
+        <div class="modal-footer justify-content-center">
+
+          <a type="button" mdbBtn color="success" outline="true" class="waves-effect" mdbWavesEffect (click)="frame.hide()">Close</a>
+        </div>
+      </div>
+      <!--/.Content-->
+    </div>
+  </div>
+
+</div>

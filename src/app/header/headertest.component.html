@@ -1,0 +1,62 @@
+<!--Navbar-->
+<mdb-navbar SideClass="navbar navbar-1 navbar-light amber lighten-2" [containerInside]="true">
+
+  <!-- Navbar brand -->
+  <mdb-navbar-brand>
+    <img src="assets/images/logoutj.png" height="60" class="d-inline-block align-top" alt="">
+
+  </mdb-navbar-brand>
+  <!-- Collapsible content -->
+  <links>
+
+    <!-- Links -->
+    <ul class="nav justify-content-center grey lighten-2 py-4">
+
+      <div class="btn-group" mdbDropdown [dropup]="true">
+        <button type="button" mdbBtn color="primary" class="waves-light" mdbWavesEffect>Cucumber Platform</button>
+        <button type="button" mdbBtn color="primary" mdbDropdownToggle class="dropdown-toggle dropdown-toggle-split px-3 waves-light"
+                mdbWavesEffect></button>
+        <li class="nav-item dropdown" dropdown>
+          <!--  <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+              Settlego Platform<span class="caret"></span></a>-->
+          <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
+            <a  class="dropdown-item waves-light" mdbWavesEffect href="cucumber">Cucumber Apiautomation Test Report</a>
+          </div>
+        </li>
+      </div>
+      <div class="btn-group" mdbDropdown [dropup]="true">
+        <button type="button" mdbBtn color="primary" class="waves-light" mdbWavesEffect>Specflow Platform</button>
+        <button type="button" mdbBtn color="primary" mdbDropdownToggle class="dropdown-toggle dropdown-toggle-split px-3 waves-light"
+                mdbWavesEffect></button>
+        <li class="nav-item dropdown" dropdown>
+          <!--<a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+            IOS Platform<span class="caret"></span></a>-->
+          <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
+            <a  class="dropdown-item waves-light" mdbWavesEffect href="specflow">Specflow Smoke Test Report</a>
+            <a class="dropdown-item waves-light"  size="sm" mdbWavesEffect href="specflow">Specflow Automation Test Report</a>
+          </div>
+        </li>
+      </div>
+      <div class="btn-group" mdbDropdown [dropup]="true">
+        <button type="button" mdbBtn color="primary" class="waves-light" mdbWavesEffect>LiveLog Platform</button>
+        <button type="button" mdbBtn color="primary" mdbDropdownToggle class="dropdown-toggle dropdown-toggle-split px-3 waves-light"
+                mdbWavesEffect></button>
+        <li class="nav-item dropdown" dropdown>
+          <!--<a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+            IOS Platform<span class="caret"></span></a>-->
+          <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
+            <a  class="dropdown-item waves-light" mdbWavesEffect href="livelog">LiveLog Smoke Test Report</a>
+            <a class="dropdown-item waves-light"  size="sm" mdbWavesEffect href="livelog">Livelog Automation Test Report</a>
+          </div>
+        </li>
+      </div>
+
+      <!-- Dropdown -->
+    </ul>
+    <!-- Links -->
+
+  </links>
+  <!-- Collapsible content -->
+
+</mdb-navbar>
+<!--/.Navbar-->
