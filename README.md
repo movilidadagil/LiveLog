@@ -1,9 +1,9 @@
 # Testcaserunner
 Öncelikle bloğumu ziyaret etmenizi rica ederim.
-Please visit my blog http://javaunifiedtester.com/force/ my vps is canceled by my.interserver so blog is not reachable.
+Please visit my blog will be available if I find vps my vps is canceled by my.interserver so blog is not reachable.
 por favor visita mi blog
 
-You can reach this github project with this url : http://199.231.185.99:3000
+You can reach this github project with this url : will be available if I find vps
 
 Bu bir angular projesidir.
 Bu paylaşım cucumber test otomasyon projelerinde senaryoların sonuçlarını
@@ -24,5 +24,6 @@ In this shared project, you need to copy your cucumber-report.json file to src d
 Eso es un proyecto angular.
 
 es necesario copiar el archivo cucumber-report.json a la carpeta src en el proyecto angular.
+
 
 
